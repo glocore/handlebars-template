@@ -1,7 +1,17 @@
-{{> header}}
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Handlebars Boilerplate</title>
+  <link rel="stylesheet" type="text/css" href="css/index.css">
+</head>
+<body>
+  {{> header}}
 
-{{#each groceries}}
-    <div class='grocery-item'>
-    <p>Item: {{this.item}} </p>
-    </div>
-{{/each}}
+  {{#each groceries}}
+      <div class='grocery-item'>
+      <p>Item: {{this.item}} </p>
+      </div>
+  {{/each}}
+</body>
+</html>
+

@@ -2,17 +2,20 @@ var gulp = require('gulp');
 var sass = require('gulp-sass');
 var imagemin = require('gulp-imagemin');
 var uglify = require('gulp-uglify');
-var handlebars = require('gulp-compile-handlebars');
 var rename = require('gulp-rename');
 var hb = require('gulp-hb');
 var path = require('path');
-// var data = require('./src/data/index.json')
 var data = require('gulp-data');
-// var concat = require('gulp-concat');
 
 /*The default task that runs when the `gulp` command is run in the project
  *directory.*/
-gulp.task('default', ['copyHTML', 'compileSASS', 'imageMin', 'scripts', 'handlebars']);
+gulp.task('default', [
+  'copyHTML',
+  'compileSASS',
+  'imageMin',
+  'scripts',
+  'handlebars'
+]);
 
 gulp.task('watch', function() {
   gulp.watch('src/js/*.js', ['scripts']);
@@ -66,49 +69,3 @@ gulp.task('handlebars', function() {
     }))
     .pipe(gulp.dest('build'));
 })
-
-/******************************************************************************/
-/*Playground*/
-/*gulp.task('play', function() {
-  options = {
-    ignorePartials: true,
-    batch : ['./src/partials']
-  }
-
-  return gulp.src('src/templates/*.hbs')
-    .pipe(data(function(file) {
-      console.log(path.basename(file.path));
-      return require('./src/data/' + path.basename(file.path, '.hbs') + '.json');
-    }))
-    .pipe(handlebars())
-    .pipe(rename(function(path) {
-      path.extname = ".html";
-    }))
-    .pipe(gulp.dest('dist'));
-});*/
-
-
-gulp.task('play', function() {
-  return gulp.src('src/templates/*hbs')
-    .pipe(data(function(file) {
-        console.log(path.basename(file.path, '.hbs'))
-        return require('./src/data/' + path.basename(file.path, '.hbs') + '.json');
-    }))
-    .pipe(hb({
-      partials: './src/partials/*.hbs',
-
-    }))
-    .pipe(rename(function(path) {
-      path.extname = ".html";
-    }))
-    .pipe(gulp.dest('dist'));
-})
-/*
-gulp.task('json', function() {
-  gulp.src('src/data/*.json')
-    data(function(file) {
-      return { 'foo': file.path }
-    })
-    .pipe(gulp.dest('dist'));
-});
-*/
