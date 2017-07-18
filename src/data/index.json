@@ -1,0 +1,8 @@
+{
+  "groceries":[
+    {"item": "Potato"},
+    {"item": "Flour"},
+    {"item": "Yogurt"},
+    {"item": "Beans"}
+  ]
+}
