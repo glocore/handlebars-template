@@ -1,11 +1,15 @@
-var gulp = require('gulp');
-var sass = require('gulp-sass');
-var imagemin = require('gulp-imagemin');
-var uglify = require('gulp-uglify');
-var rename = require('gulp-rename');
-var hb = require('gulp-hb');
-var path = require('path');
-var data = require('gulp-data');
+var gulp         = require('gulp');
+var sass         = require('gulp-sass');
+var imagemin     = require('gulp-imagemin');
+var uglify       = require('gulp-uglify');
+var rename       = require('gulp-rename');
+var hb           = require('gulp-hb');
+var path         = require('path');
+var data         = require('gulp-data');
+var postcss      = require('gulp-postcss');
+var sourcemaps   = require('gulp-sourcemaps');
+var autoprefixer = require('autoprefixer');
+
 
 /*The default task that runs when the `gulp` command is run in the project
  *directory.*/
@@ -35,6 +39,9 @@ gulp.task('copyHTML', function() {
 gulp.task('compileSASS', function() {
   gulp.src('src/sass/*.scss')
     .pipe(sass().on('error', sass.logError))
+    .pipe(sourcemaps.init())
+    .pipe(postcss([ autoprefixer() ]))
+    .pipe(sourcemaps.write('.'))
     .pipe(gulp.dest('build/css'));
 });
 
